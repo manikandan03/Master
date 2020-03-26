@@ -1,0 +1,191 @@
+﻿@page
+
+@{
+    Layout = "~/Pages/_Layout.cshtml";
+}
+<div id="page-wrapper">
+    <div class="container-fluid">
+
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">View Questions</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a href="#">Dashboard</a></li>
+                    <li class="active">View Questions</li>
+                </ol>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-sm-4">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        Search
+                        <div class="pull-right"><a href="#" data-perform="panel-collapse"><i class="ti-minus"></i></a>   </div>
+                    </div>
+                    <div class="panel-wrapper collapse in" aria-expanded="true">
+                        <div class="panel-body">
+                            <div class="col-sm-3">
+
+                                <h5 class="m-t-10">Courses</h5>
+                                <select class="form-control select2" id="ddlCourse">
+                                    <option value="">--Select Course--</option>
+                                    <option value="Course 1"> Course 1</option>
+                                    <option value="Course 2"> Course 2</option>
+                                    <option value="Course 3"> Course 3</option>
+                                    <option value="Course 4"> Course 4</option>
+                                    <option value="Course 5"> Course 5</option>
+                                    <option value="Course 6"> Course 6</option>
+                                    <option value="Course 7"> Course 7</option>
+                                </select>
+
+
+                            </div>
+                            <div class="col-sm-3">
+
+                                <h5 class="m-t-10">Semester</h5>
+                                <select class="form-control select2" id="ddlSemester">
+                                    <option value="">--Select Semester--</option>
+                                    <option value="Semester 1"> Semester 1</option>
+                                    <option value="Semester 2"> Semester 2</option>
+                                    <option value="Semester 3"> Semester 3</option>
+                                    <option value="Semester 4"> Semester 4</option>
+                                    <option value="Semester 5"> Semester 5</option>
+                                    <option value="Semester 6"> Semester 6</option>
+                                    <option value="Semester 7"> Semester 7</option>
+                                </select>
+
+
+                            </div>
+                            <div class="col-sm-3">
+
+                                <h5 class="m-t-10">Section</h5>
+                                <select class="form-control select2" id="ddlSection">
+                                    <option value="">--Select Section--</option>
+                                    <option value="Section 1"> Section 1</option>
+                                    <option value="Section 2"> Section 2</option>
+                                    <option value="Section 3"> Section 3</option>
+                                    <option value="Section 4"> Section 4</option>
+                                    <option value="Section 5"> Section 5</option>
+                                    <option value="Section 6"> Section 6</option>
+                                    <option value="Section 7"> Section 7</option>
+                                </select>
+
+
+                            </div>
+                            <div class="col-sm-3 ">
+                                <button class="btn btn-block btn-info btn-rounded" id="btnSearch" style="margin-top: 35px;">View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+     
+        <!-- /row -->
+
+        <div class="row" id="searchResult"  >
+
+            <div class="col-sm-12">
+                <div class="white-box">
+                    <h3 class="box-title m-b-0">Answers</h3>
+                    <p class="text-muted m-b-30">Export data to Copy, CSV, Excel, PDF & Print</p>
+                    <div class="table-responsive">
+                        <table id="example23" class="display nowrap" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>
+                                        Courses
+                                    </th>
+                                    <th>Semester</th>
+                                    <th>Section</th>
+                                    <th>Answer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Courses 1</td>
+                                    <td>Semester 2</td>
+                                    <td>Section 1</td>
+                                    <td>61</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>2</td>
+                                    <td>Courses 2</td>
+                                    <td>Semester 3</td>
+                                    <td>Section 2</td>
+                                    <td>61</td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- /.row -->
+        <!-- ============================================================== -->
+        <!-- Right sidebar -->
+        <!-- ============================================================== -->
+        <!-- .right-sidebar -->
+        <!-- ============================================================== -->
+        <!-- End Right sidebar -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- /.container-fluid -->
+
+</div>
+<script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="js/waves.js"></script>
+<script src="../plugins/bower_components/toast-master/js/jquery.toast.js"></script>
+<script src="js/toastr.js"></script>
+<script>
+
+
+    $(document).ready(function () {
+    $('#searchResult').hide();
+    $("#btnSearch").on("click", function () {
+     if ($('#ddlCourse').val() == "") {
+                   alertMessage('Selcet Course','warning');
+                return false;
+            }
+     else if ($('#ddlSemester').val() == "") {
+                   alertMessage('Selcet Semester','warning');
+                return false;
+            }
+    else if ($('#ddlSection').val() == "") {
+                   alertMessage('Selcet Section','warning');
+                return false;
+            }
+    else
+    {
+    $('#searchResult').show();
+
+    }
+
+    });
+
+});
+
+    function alertMessage(message,type)
+    {
+            $.toast({
+            text: message,
+            position: 'top-right',
+            loaderBg: '#ff6849',
+            icon: type,
+            hideAfter: 1500,
+            stack: 6
+        });
+
+    }
+</script>
